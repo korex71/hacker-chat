@@ -1,5 +1,5 @@
-import ComponentsBuilder from "./components.js";
-import { constants } from "./constants.js";
+import ComponentsBuilder from './components.js';
+import { constants } from './constants.js';
 
 export default class TerminalController {
   #usersCollors = new Map();
@@ -7,7 +7,7 @@ export default class TerminalController {
   constructor() {}
 
   #pickCollor() {
-    return "#" + (((1 << 24) * Math.random()) | 0).toString(16) + "-fg";
+    return '#' + (((1 << 24) * Math.random()) | 0).toString(16) + '-fg';
   }
 
   #getUserCollor(username) {
@@ -23,7 +23,7 @@ export default class TerminalController {
   #onInputReceived(eventEmitter) {
     return function () {
       const message = this.getValue();
-      console.log(message);
+      eventEmitter.emit(constants.events.app.MESSAGE_SENT, message);
       this.clearValue();
     };
   }
@@ -81,7 +81,7 @@ export default class TerminalController {
 
   async initializeTable(eventEmitter) {
     const components = new ComponentsBuilder()
-      .setScreen({ title: "HackerChat - Kore" })
+      .setScreen({ title: 'HackerChat - Kore' })
       .setLayoutComponent()
       .setInputComponent(this.#onInputReceived(eventEmitter))
       .setChatComponent()

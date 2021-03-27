@@ -7,7 +7,7 @@ export default class CliConfig {
 
     this.host = hostname;
     this.port = port;
-    this.protocol = protocol.replace(/\W/, "");
+    this.protocol = protocol.replace(/\W/, '');
   }
   static parseArguments(commands) {
     const cmd = new Map();
@@ -15,11 +15,12 @@ export default class CliConfig {
       const index = parseInt(key);
       const command = commands[key];
 
-      const commandPrefix = "--";
+      const commandPrefix = '--';
       if (!command.includes(commandPrefix)) continue;
-      cmd.set(command.replace(commandPrefix, ""), commands[index + 1]);
+      cmd.set(command.replace(commandPrefix, ''), commands[index + 1]);
     }
 
-    return new CliConfig(Object.fromEntries(cmd));
+    return new CliConfig(Object.fromEntries(cmd)); // Chave-valor para objeto.
+    // Inverso de Object.Entries()
   }
 }
