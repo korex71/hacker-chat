@@ -13,7 +13,7 @@ export default class SocketClient {
     this.#serverConnection.write(JSON.stringify({ event, message }));
   }
 
-  attachEvents(){
+  attachEvents(events){
     this.#serverConnection.on('data', data => {
       try {
         data.toString()
