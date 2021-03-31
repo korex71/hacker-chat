@@ -37,7 +37,7 @@ export default class SocketClient {
     })
 
     for(const [key, value] of events){
-      this.#serverListener.on(key, value) // 42:36
+      this.#serverListener.on(key, value)
     }
   }
 

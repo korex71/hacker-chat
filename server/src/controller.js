@@ -58,6 +58,17 @@ export default class Controller {
     }
   }
 
+  message(socketId, data){
+    const {username, roomId} = this.#users.get(socketId);
+    this.broadCast({
+      roomId,
+      socketId,
+      event: constants.event.MESSAGE,
+      message: {username, message: data},
+      includeCurrentSocket: true
+    })
+  }
+
   #joinUserOnRoom(roomId, user) {
     const usersOnRoom = this.#rooms.get(roomId) ?? new Map();
     usersOnRoom.set(user.id, user);
@@ -66,20 +77,38 @@ export default class Controller {
     return usersOnRoom;
   }
 
+  #logoutUser(id, roomId){
+    this.#users.delete(id);
+    const usersOnRoom = this.#rooms.get(roomId);
+
+    usersOnRoom.delete(id);
+
+    this.#rooms.set(roomId, usersOnRoom)
+  }
+
   #onSocketData(id) {
     return data => {
       try {
         const { event, message } = JSON.parse(data);
         this[event](id, message);
       } catch (error) {
-        console.error(`wrong event format!!`, data.toString())
+        console.error(`Formato do evento incorreto!!`, data.toString())
       }
     };
   }
 
   #onSocketClosed(id) {
     return (data) => {
-      console.log('onSocketClosed', id);
+      const {username, roomId} = this.#users.get(id);
+      console.log(username, 'foi desconectado.');
+      this.#logoutUser(id, roomId);
+
+      this.broadCast({
+        roomId,
+        message: {id, username},
+        socketId: id,
+        event: constants.event.DISCONNECT_USER
+      })
     };
   }
 

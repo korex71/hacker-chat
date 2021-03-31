@@ -1,12 +1,19 @@
 {
-  "name": "client",
+  "name": "@korex7/hacker-chat-client",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
+  "bin": {
+    "hacker-chat": "index.js"
+  },
   "scripts": {
     "user01": "node index.js --username kore --room sala01 --hostUri http://localhost:9898",
     "user02": "node index.js --username azrael --room sala01 --hostUri http://localhost:9898",
-    "user03": "node index.js --username jelbs --room sala01 --hostUri http://localhost:9898"
+    "user03": "node index.js --username jeff --room sala02 --hostUri http://localhost:9898",
+    "user04": "node index.js --username ryan --room sala02 --hostUri http://localhost:9898",
+    "user05": "node index.js --username Kore --room sala01",
+    "user06": "node index.js --username Camille --room sala01",
+    "_comment": "echo \nUsuários 5 e 6 são de produção,  apontando o servidor hosteado no Heroku, podendo conectar-se com outros usuários de uma sala escolhida."
   },
   "license": "MIT",
   "dependencies": {

@@ -15,7 +15,7 @@ export default class SocketServer {
   async initialize(eventEmitter) {
     const server = http.createServer((req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end('Hi');
+      res.end('pog ?');
     });
 
     server.on('upgrade', (req, socket) => {

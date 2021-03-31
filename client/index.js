@@ -1,8 +1,6 @@
-/* 
-node index.js
-  --username kore
-  --room sala01
-  --hostUri localhost
+/*
+npm i -g @korex7/hacker-chat-client
+
 */
 
 import Events from 'events';
@@ -29,6 +27,12 @@ const data = {
   roomId: config.room,
   username: config.username,
 };
+
+if(!data.roomId || !data.username) {
+  process.stdout.write(`\nErro:\nArgumentos esperados: \nhacker-chat --username name --room roomname`)
+  process.exit(0)
+}
+
 
 eventManager.joinRoomAndWaitForMessages(data);
 

@@ -14,6 +14,19 @@ export default class EventManager {
       this.socketClient.sendMessage(constants.events.socket.MESSAGE, msg);
     });
   }
+
+  disconnectUser(user){
+    const {username, id} = user;
+    this.#allUsers.delete(id);
+    this.#updateActivityLogComponent(`${user.username} Saiu!`)
+    this.#updateUsersComponent()
+  }
+  message(message){
+    this.componentEmitter.emit(
+      constants.events.app.MESSAGE_RECEIVED,
+      message
+    )
+  }
   updateUsers(users){
     const connectedUsers = users;
     connectedUsers.forEach(({id, username}) => this.#allUsers.set(id, username))
@@ -24,7 +37,7 @@ export default class EventManager {
     const user = message;
     this.#allUsers.set(user.id, user.username)
     this.#updateUsersComponent()
-    this.#updateActivityLogComponent(`${user.username} Joined!`)
+    this.#updateActivityLogComponent(`${user.username} Entrou!`)
   }
 
   #updateActivityLogComponent(message){
