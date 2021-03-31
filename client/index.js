@@ -1,6 +1,6 @@
+#!/usr/bin/env node
 /*
-npm i -g @korex7/hacker-chat-client
-
+    chmod +x index.js
 */
 
 import Events from 'events';

@@ -1,6 +1,6 @@
 {
   "name": "@korex7/hacker-chat-client",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "type": "module",
   "main": "index.js",
   "bin": {
